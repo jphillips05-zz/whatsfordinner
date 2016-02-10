@@ -1,7 +1,7 @@
 var restify = require('restify');
 
 var server = restify.createServer({
-	name: 'blog',
+	name: 'whatsfordinner',
 	version: '0.0.1'
 });
 

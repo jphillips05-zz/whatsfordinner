@@ -1,7 +1,8 @@
 var gulp = require('gulp'),
     connect = require('gulp-connect'),
     traceur = require('gulp-traceur'),
-    watch = require('gulp-watch');
+    watch = require('gulp-watch'),
+    concatCss = require('gulp-concat-css');
 
 gulp.task('html', function () {
     return gulp.src('src/html/**/*.html')
@@ -39,7 +40,8 @@ gulp.task('js', function () {
         .pipe(watch('src/public/**/*.js'))
         .pipe(traceur({
             modules: 'instantiate',
-            annotations: true
+            annotations: true,
+            experimental: true
         }))
         .pipe(gulp.dest('public/app'));
 });
@@ -54,9 +56,12 @@ gulp.task('serverjs', function() {
         .pipe(gulp.dest('app'));
 });
 
-gulp.task('watch', function() {
-    
+gulp.task('concatVendorCSS', function(){
+    return gulp.src(['node_modules/bootstrap/dist/css/bootstrap.css'])
+        .pipe(concatCss("vendor.css"))
+        .pipe(gulp.dest('public/vendor/'));    
 });
+
 
 gulp.task('default', ['connect', 'html', 'vendorjs', 'js', 'serverjs']);
 

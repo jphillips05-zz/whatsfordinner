@@ -1,4 +1,4 @@
-System.register(["angular2/platform/browser", "angular2/core", "angular2/http", "angular2/router"], function($__export) {
+System.register(["angular2/platform/browser", "angular2/core", "angular2/http", "angular2/router", "./home/index", "./pantry/index"], function($__export) {
   "use strict";
   var bootstrap,
       Component,
@@ -14,6 +14,8 @@ System.register(["angular2/platform/browser", "angular2/core", "angular2/http", 
       ROUTER_PROVIDERS,
       LocationStrategy,
       HashLocationStrategy,
+      Home,
+      Pantry,
       App;
   return {
     setters: [function($__m) {
@@ -34,6 +36,10 @@ System.register(["angular2/platform/browser", "angular2/core", "angular2/http", 
       ROUTER_PROVIDERS = $__m.ROUTER_PROVIDERS;
       LocationStrategy = $__m.LocationStrategy;
       HashLocationStrategy = $__m.HashLocationStrategy;
+    }, function($__m) {
+      Home = $__m.Home;
+    }, function($__m) {
+      Pantry = $__m.Pantry;
     }],
     execute: function() {
       App = function() {
@@ -46,7 +52,15 @@ System.register(["angular2/platform/browser", "angular2/core", "angular2/http", 
             selector: 'app',
             templateUrl: './app/main.html',
             directives: [ROUTER_DIRECTIVES]
-          })];
+          }), new RouteConfig([{
+            path: '/',
+            component: Home,
+            as: 'Home'
+          }, {
+            path: '/Pantry',
+            component: Pantry,
+            as: 'Pantry'
+          }])];
         }});
       bootstrap(App, [ROUTER_PROVIDERS, HTTP_PROVIDERS, provide(LocationStrategy, {useClass: HashLocationStrategy})]);
     }
