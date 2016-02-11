@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+    	"experimentalDecorators": true,
+        "target": "es5",
+        "module": "commonjs",
+        "declaration": false,
+        "noImplicitAny": false,
+        "removeComments": true,
+        "noLib": false
+    },
+    "exclude": [
+        "node_modules",
+        "!node_modules/angular2"
+    ]
+}

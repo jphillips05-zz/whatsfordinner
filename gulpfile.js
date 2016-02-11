@@ -2,7 +2,8 @@ var gulp = require('gulp'),
     connect = require('gulp-connect'),
     traceur = require('gulp-traceur'),
     watch = require('gulp-watch'),
-    concatCss = require('gulp-concat-css');
+    concatCss = require('gulp-concat-css'),
+    ts = require('gulp-typescript');
 
 gulp.task('html', function () {
     return gulp.src('src/html/**/*.html')
@@ -36,22 +37,24 @@ gulp.task('vendorjs', function () {
 });
 
 gulp.task('js', function () {
-    return gulp.src('src/public/**/*.js')
-        .pipe(watch('src/public/**/*.js'))
-        .pipe(traceur({
-            modules: 'instantiate',
-            annotations: true,
-            experimental: true
+    return gulp.src('src/public/**/*.ts')
+        .pipe(watch('src/public/**/*.ts'))
+        .pipe(ts({
+            module: 'system',
+            experimentalDecorators: true,
+            moduleResolution: 'node',
+            target: 'ES5'            
         }))
         .pipe(gulp.dest('public/app'));
 });
 
 gulp.task('serverjs', function() {
     return gulp.src('src/server/**/*.js')
-        .pipe(watch('src/server/**/*.js'))
+        //.pipe(watch('src/server/**/*.js'))
         .pipe(traceur({
             modules: 'instantiate',
-            annotations: true
+            annotations: true,
+            experimental: true,
         }))
         .pipe(gulp.dest('app'));
 });
@@ -63,5 +66,7 @@ gulp.task('concatVendorCSS', function(){
 });
 
 
-gulp.task('default', ['connect', 'html', 'vendorjs', 'js', 'serverjs']);
+
+
+gulp.task('default', ['connect', 'html', 'vendorjs', 'concatVendorCSS', 'js', 'serverjs']);
 

@@ -7,15 +7,15 @@ import {Component} from 'angular2/core';
 
 export class Pantry {
     
-    constructor() {
-        this.searchStr = '';
-    }
+    private searchStr: string = '';
     
-    search(str) {
+    constructor() {}
+    
+    search = (str) => {
         console.log(str);
     }
     
     ngOnInit() {
         //get pantry list
     }
-}
+};
