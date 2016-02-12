@@ -38,7 +38,7 @@ gulp.task('vendorjs', function () {
 
 gulp.task('js', function () {
     return gulp.src('src/public/**/*.ts')
-        .pipe(watch('src/public/**/*.ts'))
+        //.pipe(watch('src/public/**/*.ts'))
         .pipe(ts({
             module: 'system',
             experimentalDecorators: true,
@@ -50,7 +50,7 @@ gulp.task('js', function () {
 
 gulp.task('serverjs', function() {
     return gulp.src('src/server/**/*.js')
-        //.pipe(watch('src/server/**/*.js'))
+        .pipe(watch('src/server/**/*.js'))
         .pipe(traceur({
             modules: 'instantiate',
             annotations: true,
